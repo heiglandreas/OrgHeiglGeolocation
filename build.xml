@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="OrgHeiglGeolocation" default="build">
+
+    <!--
+        Cleanup
+    -->
+    <target name="clean">
+        <delete dir="./build" />
+    </target>
+
+    <!--
+        Prepare everything
+    -->
+    <target name="prepare">
+        <mkdir dir="./build/logs" mode="0777"/>
+    </target>
+    <!--
+        Run all tests
+    -->
+    <target name="test" depends="prepare">
+        <phpunit printsummary="true" codecoverage="false">
+            <formatter todir="build/logs" type="xml"/>
+            <batchtest>
+                <fileset dir="./test">
+                    <include name="**/*.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+
+    <!--
+        Install everything necessary.
+
+        This will install and run composer
+    -->
+    <target name="install">
+        <if>
+            <not>
+                <available file="composer.phar"/>
+            </not>
+            <then>
+                <echo>Installing Composer</echo>
+                <exec command="curl -sS https://getcomposer.org/installer | php" dir="."/>
+            </then>
+        </if>
+        <if>
+            <not>
+                <available file="composer.lock"/>
+            </not>
+            <then>
+                <echo>Installing required libraries</echo>
+                <composer command="install" />
+            </then>
+        </if>
+    </target>
+
+    <!--
+        Update the current installation
+    -->
+    <target name="update" depends="install">
+
+        <echo>Updating composer</echo>
+        <composer command="self-update"/>
+        <echo>Updating the libraries</echo>
+        <composer command="update"/>
+    </target>
+
+    <!--
+        Make a full build
+    -->
+    <target name="build" depends="clean, prepare, update, test" />
+
+</project>

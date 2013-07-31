@@ -1,0 +1,47 @@
+{
+    "name" : "org_heigl/geolocation",
+    "type" : "library",
+    "description": "Provides a form-element for locating a spot on the earth and providing Latitude/Longitude-values",
+    "keywords": ["geolocation", "latitude", "longitude", "earth"],
+    "homepage": "http://github.com/heiglandreas/OrgHeiglGeolocation",
+    "license": "MIT",
+    "authors": [{
+        "name": "Andreas Heigl",
+        "email": "andreas@heigl.org",
+        "homepage": "http://andreas.heigl.org",
+        "role": "Developer"
+    }],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-form": ">=2.1,<=2.3.x-dev",
+        "zendframework/zend-inputfilter": ">=2.1,<=2.3.x-dev",
+        "zendframework/zend-validator": ">=2.1,<=2.3.x-dev",
+        "zendframework/zend-view": ">=2.1,<=2.3.x-dev",
+        "zendframework/zend-i18n": ">=2.1,<=2.3.x-dev",
+        "zendframework/zend-servicemanager": ">=2.1,<=2.3.x-dev",
+        "zendframework/zend-escaper": ">=2.1,<=2.3.x-dev",
+        "zendframework/zend-modulemanager": ">=2.1,<=2.3.x-dev",
+        "jquery/jquery" : "1.7.2"
+    },
+    "repositories" : [
+    {
+        "type": "package",
+        "package": {
+            "name": "jquery/jquery",
+            "version": "1.7.2",
+            "dist": {
+                "url": "http://code.jquery.com/jquery-1.7.2.js",
+                "type": "file"
+            }
+        }
+    }],
+    "autoload": {
+        "psr-0": {
+            "OrgHeiglGeolocation": "src"
+        },
+        "classmap": [
+            "./"
+        ]
+    },
+    "minimum-stability": "dev"
+}
