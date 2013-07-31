@@ -20,9 +20,9 @@ Use ```composer``` for installation by adding the following to your ```composer.
 After installation you should be able to add a form-element ```Geolocation``` to your forms right away
 like the following example:
 
-    ```php
-    $form = new Zend\Form();
-    $form->addElement('geolocation');
-    ```
+```php
+$form = new Zend\Form();
+$form->addElement('geolocation');
+```
 
   [1]: http://wiki.openstreetmap.org/wiki/Nominatim 
