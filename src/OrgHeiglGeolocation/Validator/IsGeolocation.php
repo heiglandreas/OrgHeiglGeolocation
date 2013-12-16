@@ -78,7 +78,7 @@ class IsGeolocation extends AbstractValidator
     public function isValid($value)
     {
         if (! preg_match('/(?P<lat>[-]?\d{1,2}(\.\d+)?)\D+(?P<lon>[-]?\d{1,3}(\.\d+)?)/', $value, $result)) {
-            $this->error = self::INVALID_FORMAT;
+            $this->error(self::INVALID_FORMAT);
             return false;
         }
 
@@ -86,12 +86,12 @@ class IsGeolocation extends AbstractValidator
         $longitude = (float) $result['lon'];
 
         if (-90 > $latitude || 90 < $latitude) {
-            $this->error = self::LATITUDE_OUT_OF_RANGE;
+            $this->error(self::LATITUDE_OUT_OF_RANGE);
             return false;
         }
 
         if (-180 > $longitude || 180 < $longitude) {
-            $this->error = self::LONGITUDE_OUT_OF_RANGE;
+            $this->error(self::LONGITUDE_OUT_OF_RANGE);
             return false;
         }
 
