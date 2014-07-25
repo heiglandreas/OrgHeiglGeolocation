@@ -53,7 +53,19 @@ class FormGeolocation extends FormText
 
         $view = $this->getView();
 
-        return parent::render($element);
+        $formelement = parent::render($element);
+
+        $formelement .= '<div id="' . $element->getAttribute('id') . '_wrapper">'
+            . '  <div class="searchbox"></div>'
+            . '  <div class="resultbox"></div>'
+            . '  <div class="map"></div>'
+            . '</div>'
+            . '<script type="text/javascript">'
+            . '  $("#' . $element->getAttribute('id') . '").orgHeiglGeolocation();'
+            . '</script>'
+        ;
+
+        return $formelement;
 
     }
 
