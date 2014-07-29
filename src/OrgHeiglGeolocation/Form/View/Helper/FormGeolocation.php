@@ -55,7 +55,7 @@ class FormGeolocation extends FormText
 
         $formelement = parent::render($element);
 
-        $formelement .= '<div id="' . $element->getAttribute('id') . '_wrapper">'
+        $formelement .= '<div id    ="' . $element->getAttribute('id') . '_wrapper">'
             . '  <div class="searchbox"></div>'
             . '  <div class="resultbox"></div>'
             . '  <div class="map"></div>'

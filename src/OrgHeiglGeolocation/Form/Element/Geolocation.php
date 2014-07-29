@@ -32,7 +32,7 @@ namespace OrgHeiglGeolocation\Form\Element;
 
 use OrgHeiglGeolocation\Validator\IsGeolocation;
 use Zend\Filter\StringTrim;
-use Zend\Form\Element\Text as TextElement;
+use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
 
 /**
@@ -45,7 +45,7 @@ use Zend\InputFilter\InputProviderInterface;
  * @since     03.07.13
  * @link      https://github.com/heiglandreas/OrgHeiglGeolocation
  **/
-class Geolocation extends TextElement implements InputProviderInterface
+class Geolocation extends Element implements InputProviderInterface
 {
     /**
      * Seed the attributes
@@ -53,7 +53,8 @@ class Geolocation extends TextElement implements InputProviderInterface
      * @var array
      */
     protected $attributes = array(
-        'type' => 'text',
+        'type'  => 'text',
+        'class' => 'orgHeiglGeolocation',
     );
 
     /**

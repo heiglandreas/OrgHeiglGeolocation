@@ -96,4 +96,14 @@ class Module
             ),
         );
     }
+
+    public function getViewHelperConfig()
+    {
+        return array(
+            'invokables' => array(
+                'formelement' => 'OrgHeiglGeolocation\Form\View\Helper\FormElement',
+                'formgeolocation' => 'OrgHeiglGeolocation\Form\View\Helper\FormGeolocation',
+            ),
+        );
+    }
 }
