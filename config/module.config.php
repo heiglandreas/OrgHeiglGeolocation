@@ -36,35 +36,11 @@ return array(
     ),
     'asset_manager' => array(
         'resolver_configs' => array(
-//            'collections' => array(
-//                'js/d.js' => array(
-//                    'js/a.js',
-//                    'js/b.js',
-//                    'js/c.js',
-//                ),
-//            ),
-            'paths' => array(
-                __DIR__ . '/../public',
-                __DIR__ . '/../../../components/'
+            'aliases' => array(
+                'orgheiglgeolocation/js' => __DIR__ . '/../public/js',
+                'orgheiglgeolocation/css' => __DIR__ . '/../public/css',
+                'orgheiglgeolocation/lib' => __DIR__ . '/../public/lib',
             ),
-//            'map' => array(
-//                'orgheiglgeolocation/css' => __DIR__ . '/../public/css',
-//                'orgheiglgeolocation/js' => __DIR__ . '/../public/js',
-//                'orgheiglgeolocation/lib' => __DIR__ . '/../public/lib',
-//            ),
         ),
-//        'filters' => array(
-//            'js/d.js' => array(
-//                array(
-//                    // Note: You will need to require the classes used for the filters yourself.
-//                    'filter' => 'JSMin',
-//                ),
-//            ),
-//        ),
-//        'caching' => array(
-//            'js/d.js' => array(
-//                'cache'     => 'Apc',
-//            ),
-//        ),
     ),
 );

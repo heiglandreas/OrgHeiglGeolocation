@@ -42,12 +42,15 @@ class Geolocation extends FormText
     public function render(ElementInterface $element)
     {
         $renderer = $this->getView();
+
+        $basePath = $renderer->basePath();
+
         if ($renderer instanceof PhpRenderer) {
-            $renderer->headScript()->appendFile('/jquery/jquery.min.js');
-            $renderer->headScript()->appendFile('/lib/leaflet-0.7.3/leaflet.js');
-            $renderer->headScript()->appendFile('/js/orgHeiglGeolocation.js');
+            $renderer->headScript()->appendFile($basePath . '/jquery/jquery.min.js');
+            $renderer->headScript()->appendFile($basePath . '/orgheiglgeolocation/lib/leaflet-0.7.3/leaflet.js');
+            $renderer->headScript()->appendFile($basePath . '/orgheiglgeolocation/js/orgHeiglGeolocation.js');
             $renderer->headScript()->appendScript('$(\'.orgheiglgeolocation\').orgHeiglGeolocation()');
-            $renderer->headLink()->appendStylesheet('/lib/leaflet-0.7.3/leaflet.css');
+            $renderer->headLink()->appendStylesheet($basePath . '/orgheiglgeolocation/lib/leaflet-0.7.3/leaflet.css');
         }
 
         $class = $element->getAttribute('class');

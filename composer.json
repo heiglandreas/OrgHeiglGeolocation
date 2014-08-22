@@ -21,8 +21,7 @@
         "zendframework/zend-servicemanager": ">=2.1,<=2.4.x-dev",
         "zendframework/zend-escaper": ">=2.1,<=2.4.x-dev",
         "zendframework/zend-modulemanager": ">=2.1,<=2.4.x-dev",
-        "components/jquery" : "1.8.x-dev",
-        "rwoverdijk/assetmanager" : "1.*"
+        "components/jquery" : "1.8.x-dev"
     },
     "repositories" : [
     {

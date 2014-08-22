@@ -71,8 +71,6 @@ class Module
     {
         return array(
             'factories' => array(
-                'OrgHeiglGeolocation\Options\ModuleOptions' => 'OrgHeiglGeolocation\Service\ModuleOptionsFactory',
-                'OrgHeiglGeolocation\FormManager' => 'OrgHeiglGeolocation\Service\FormManagerFactory',
                 'org_heigl_geolocation.renderer' => 'OrgHeiglGeolocation\Service\GeolocationRendererFactory',
                 'org_heigl_geolocation.renderer.geolocation' => 'OrgHeiglGeolocation\Service\GeolocationRendererFactory',
             ),
