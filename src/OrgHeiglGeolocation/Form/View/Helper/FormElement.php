@@ -29,10 +29,28 @@
  * @link      https://github.com/heiglandreas/
  */
 
-echo $this->renderedElement; ?>
+namespace OrgHeiglGeolocation\Form\View\Helper;
 
-<div id="<?php echo str_replace(array('[',']'), array('_', '_'),$this->element->getName()) ;?>_wrapper">
-    <div class="searchbox"></div>
-    <div class="resultbox"></div>
-    <div class="map"></div>
-</div>
+use OrgHeiglGeolocation\Form\Element;
+use Zend\Form\View\Helper\FormElement as BaseFormElement;
+use Zend\Form\ElementInterface;
+
+class FormElement extends BaseFormElement
+{
+    public function render(ElementInterface $element)
+    {
+        $renderer = $this->getView();
+        if (!method_exists($renderer, 'plugin')) {
+            // Bail early if renderer is not pluggable
+            error_log('fail');
+            return '';
+        }
+
+        if ($element instanceof Element\Geolocation) {
+            $helper = $renderer->plugin('org_heigl_geolocation.formelement');
+            return $helper($element);
+        }
+
+        return parent::render($element);
+    }
+}

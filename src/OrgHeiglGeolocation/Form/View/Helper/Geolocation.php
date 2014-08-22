@@ -32,20 +32,37 @@
 namespace OrgHeiglGeolocation\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
-use Zend\Form\View\Helper\AbstractHelper;
+use Zend\Form\View\Helper\FormText;
+use Zend\View\Renderer\PhpRenderer;
 
-class Geolocation extends AbstractHelper
+class Geolocation extends FormText
 {
     protected $script = 'org-heigl-geolocation/form-element/geolocation';
 
     public function render(ElementInterface $element)
     {
+        $renderer = $this->getView();
+        if ($renderer instanceof PhpRenderer) {
+            $renderer->headScript()->appendFile('/jquery/jquery.min.js');
+            $renderer->headScript()->appendFile('/lib/leaflet-0.7.3/leaflet.js');
+            $renderer->headScript()->appendFile('/js/orgHeiglGeolocation.js');
+            $renderer->headScript()->appendScript('$(\'.orgheiglgeolocation\').orgHeiglGeolocation()');
+            $renderer->headLink()->appendStylesheet('/lib/leaflet-0.7.3/leaflet.css');
+        }
+
+        $class = $element->getAttribute('class');
+        $class .= " orgheiglgeolocation";
+
+        $element->setAttribute('class', $class);
+
+
         return $this->getView()->render($this->script, array(
-            'element' => $element
+            'element' => $element,
+            'renderedElement' => parent::render($element),
         ));
     }
 
-    public function __invoke(ElementInterface $element)
+    public function __invoke(ElementInterface $element = null)
     {
         return $this->render($element);
     }

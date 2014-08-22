@@ -25,31 +25,29 @@
  * @copyright ©2014-2014 Andreas Heigl
  * @license   http://www.opesource.org/licenses/mit-license.php MIT-License
  * @version   0.0
- * @since     25.07.14
+ * @since     05.08.14
  * @link      https://github.com/heiglandreas/
  */
 
-namespace OrgHeiglGeolocation\Form\View\Helper;
+namespace OrgHeiglGeolocation\Service;
 
-use OrgHeiglGeolocation\Form\Element;
-use Zend\Form\View\Helper\FormElement as BaseFormElement;
-use Zend\Form\ElementInterface;
 
-class FormElement extends BaseFormElement
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use OrgHeiglGeolocation\Form\View\Helper\FormElement;
+
+class FormElementFactory implements FactoryInterface
 {
-    public function render(ElementInterface $element)
+    /**
+     * Create service
+     *
+     * @param  ServiceLocatorInterface $serviceLocator
+     * @return mixed
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $renderer = $this->getView();
-        if (!method_exists($renderer, 'plugin')) {
-            // Bail early if renderer is not pluggable
-            return '';
-        }
+        $renderer = $serviceLocator->getServiceLocator()->get('org_heigl_geolocation.renderer');
 
-        if ($element instanceof Element\Geolocation) {
-            $helper = $renderer->plugin('form_geolocation');
-            return $helper($element);
-        }
-
-        return parent::render($element);
+        return new FormElement($renderer);
     }
 }
