@@ -70,11 +70,7 @@ class Module
     public function getServiceConfig()
     {
         return array(
-            'factories' => array(
-                'org_heigl_geolocation.renderer' => 'OrgHeiglGeolocation\Service\GeolocationRendererFactory',
-                'org_heigl_geolocation.renderer.geolocation' => 'OrgHeiglGeolocation\Service\GeolocationRendererFactory',
-            ),
-            'invokables' => array(
+           'invokables' => array(
                 'org_heigl_geolocation.formelement' => 'OrgHeiglGeolocation\View\Helper\Geolocation',
 
             ),

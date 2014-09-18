@@ -31,9 +31,8 @@
 
 namespace OrgHeiglGeolocationTest\Form\Element;
 
-use OrgHeiglGeolocation\Validator\IsGeolocation;
-use \PHPUnit_Framework_TestCase as TestCase;
 use \OrgHeiglGeolocation\Form\Element\Geolocation;
+use \PHPUnit_Framework_TestCase as TestCase;
 
 class GeolocationTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c)2014-2014 heiglandreas
+ * Copyright (c)2013-2013 heiglandreas
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,32 +22,37 @@
  *
  * @category 
  * @author    Andreas Heigl<andreas@heigl.org>
- * @copyright ©2014-2014 Andreas Heigl
+ * @copyright ©2013-2013 Andreas Heigl
  * @license   http://www.opesource.org/licenses/mit-license.php MIT-License
  * @version   0.0
- * @since     05.08.14
+ * @since     29.07.13
  * @link      https://github.com/heiglandreas/
  */
 
-namespace OrgHeiglGeolocation\Service;
+namespace OrgHeiglGeolocationTest\Form\View\Helper;
 
+use \PHPUnit_Framework_TestCase as TestCase;
+use \OrgHeiglGeolocation\Form\View\Helper\Geolocation;
+use Mockery as M;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use OrgHeiglGeolocation\Form\View\Helper\FormElement;
-
-class FormElementFactory implements FactoryInterface
+class GeolocationTest extends TestCase
 {
-    /**
-     * Create service
-     *
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return mixed
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function testRendering()
     {
-        $renderer = $serviceLocator->getServiceLocator()->get('org_heigl_geolocation.renderer');
+        $this->markTestIncomplete('Has to be implemented fully');
 
-        return new FormElement($renderer);
+        $element = M::mock('\OrgHeiglGeolocation\Form\Element\Geolocation');
+
+        $headScript = M::mock('\Zend\View\Helper\HeadScript');
+        $headLink   = M::mock('\Zend\View\Helper\HeadLink');
+        $view       = M::mock('\Zend\View\Renderer\PhpRenderer');
+        $headScript->setView($view);
+        $headLink->setView($view);
+
+        $renderer = new Geolocation();
+        $renderer->setView($view);
+
+        $this->assertEquals('foo', $renderer->render($element));
+
     }
 }
