@@ -25,12 +25,36 @@
  * @copyright ©2014-2014 Andreas Heigl
  * @license   http://www.opesource.org/licenses/mit-license.php MIT-License
  * @version   0.0
- * @since     25.07.14
+ * @since     05.08.14
  * @link      https://github.com/heiglandreas/
  */
 
-echo $this->renderedElement; ?>
+namespace OrgHeiglGeolocation\Service;
 
-<div id="<?php echo str_replace(array('[',']'), array('_', '_'),$this->element->getName()) ;?>_wrapper">
-    <div class="map"></div>
-</div>
+
+use OrgHeiglGeolocation\Renderer\Geolocation\GeolocationRenderer;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+class GeolocationRendererFactory implements FactoryInterface
+{
+    /**
+     * Create service
+     *
+     * @param ServiceLocatorInterface  $serviceLocator
+     *
+     * @return \OrgHeiglGeolocation\Renderer\GeolocationRenderer
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $renderer = new GeolocationRenderer();
+        $renderer->setHttpRouter($serviceLocator->get('HttpRouter'));
+
+
+
+//        $options = $serviceLocator->get('OrgHeiglGeolocation\Options\ModuleOptions');
+//        $renderer->setDefaultOptions($options->getRendererOptions($rendererAlias))
+
+        return $renderer;
+    }
+} 

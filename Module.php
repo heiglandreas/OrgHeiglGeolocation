@@ -71,9 +71,12 @@ class Module
     {
         return array(
             'factories' => array(
-                'OrgHeiglGeolocation\Options\ModuleOptions' => 'OrgHeiglGeolocation\Service\ModuleOptionsFactory',
-                'OrgHeiglGeolocation\FormManager' => 'OrgHeiglGeolocation\Service\FormManagerFactory',
-                'org_heigl_geolocation.renderer' => 'OrgHeiglGeolocation\Service\RendererFactory',
+                'org_heigl_geolocation.renderer' => 'OrgHeiglGeolocation\Service\GeolocationRendererFactory',
+                'org_heigl_geolocation.renderer.geolocation' => 'OrgHeiglGeolocation\Service\GeolocationRendererFactory',
+            ),
+            'invokables' => array(
+                'org_heigl_geolocation.formelement' => 'OrgHeiglGeolocation\View\Helper\Geolocation',
+
             ),
         );
     }
@@ -88,21 +91,14 @@ class Module
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function getFormElementConfig()
-    {
-        return array(
-            'invokables' => array(
-                'org_heigl_geolocation.renderer.geolocation' => 'OrgHeiglGeolocation\Renderer\GeolocationRenderer',
-            ),
-        );
-    }
-
     public function getViewHelperConfig()
     {
         return array(
             'invokables' => array(
-                'formelement' => 'OrgHeiglGeolocation\Form\View\Helper\FormElement',
-                'formgeolocation' => 'OrgHeiglGeolocation\Form\View\Helper\FormGeolocation',
+                'org_heigl_geolocation.formelement' => 'OrgHeiglGeolocation\Form\View\Helper\Geolocation',
+            ),
+            'factories' => array(
+                'formelement'     => 'OrgHeiglGeolocation\Service\FormElementFactory',
             ),
         );
     }

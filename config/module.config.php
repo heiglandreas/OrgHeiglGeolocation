@@ -29,9 +29,18 @@
  * @link      https://github.com/heiglandreas/
  */
 return array(
-    'form_elements' => array(
-        'invokables' => array(
-            'orgHeiglGeolocation' => 'OrgHeiglGeolocation\Form\Element\Geolocation',
+    'view_manager' => array(
+        'template_path_stack' => array(
+            'orgheiglgeolocation' => __DIR__ . '/../view',
+        ),
+    ),
+    'asset_manager' => array(
+        'resolver_configs' => array(
+            'aliases' => array(
+                'orgheiglgeolocation/js' => __DIR__ . '/../public/js',
+                'orgheiglgeolocation/css' => __DIR__ . '/../public/css',
+                'orgheiglgeolocation/lib' => __DIR__ . '/../public/lib',
+            ),
         ),
     ),
 );

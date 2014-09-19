@@ -73,7 +73,7 @@ class IsGeolocationTest extends PHPUnit_Framework_TestCase
         $validator = new IsGeolocation();
         $validator->isValid($teststring);
 
-        $this->assertAttributeEquals($expectedError, 'error', $validator);
+        $this->assertEquals(array($expectedError), array_keys($validator->getMessages()));
     }
 
     public function errorMessagesProvider()

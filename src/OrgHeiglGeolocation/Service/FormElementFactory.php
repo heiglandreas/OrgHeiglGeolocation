@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c)2013-2013 heiglandreas
+ * Copyright (c)2014-2014 heiglandreas
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,54 +22,32 @@
  *
  * @category 
  * @author    Andreas Heigl<andreas@heigl.org>
- * @copyright ©2013-2013 Andreas Heigl
+ * @copyright ©2014-2014 Andreas Heigl
  * @license   http://www.opesource.org/licenses/mit-license.php MIT-License
  * @version   0.0
- * @since     08.07.13
+ * @since     05.08.14
  * @link      https://github.com/heiglandreas/
  */
 
-namespace OrgHeiglGeolocationTest\Form\View\Helper;
+namespace OrgHeiglGeolocation\Service;
 
-use OrgHeiglGeolocationTest\Form\View\Helper\CommonTestCase;
-use OrgHeiglGeolocation\Form\Element;
-use OrgHeiglGeolocation\Form\View\Helper\FormGeolocation as GeolocationHelper;
 
-class FormGeolocationTest extends CommonTestCase
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use OrgHeiglGeolocation\Form\View\Helper\FormElement;
+
+class FormElementFactory implements FactoryInterface
 {
-
-    public function setup()
+    /**
+     * Create service
+     *
+     * @param  ServiceLocatorInterface $serviceLocator
+     * @return mixed
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $this->helper = new GeolocationHelper();
-        parent::setup();
+        $renderer = $serviceLocator->getServiceLocator()->get('org_heigl_geolocation.renderer');
+
+        return new FormElement($renderer);
     }
-
-    public function getElement()
-    {
-        $element = new Element\Geolocation('foo');
-        $options = array();
-        $element->setOptions($options);
-
-        return $element;
-    }
-
-    public function testRaisesExceptionWhenNoNameIsPresent()
-    {
-        $element = new Element\Geolocation();
-        $this->setExpectedException('Zend\Form\Exception\DomainException', 'name');
-        $this->helper->render($element);
-    }
-
-    public function testRendering()
-    {
-        $element = $this->getElement();
-
-        $result = $this->helper->render($element);
-
-        $this->assertContains('<input type="text"', $result);
-        $this->assertContains('name="foo"', $result);
-        $this->assertContains('class=" orgheiglgeolocation"', $result);
-    }
-
-
 }

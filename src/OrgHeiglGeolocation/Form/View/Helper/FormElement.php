@@ -42,11 +42,12 @@ class FormElement extends BaseFormElement
         $renderer = $this->getView();
         if (!method_exists($renderer, 'plugin')) {
             // Bail early if renderer is not pluggable
+            error_log('fail');
             return '';
         }
 
         if ($element instanceof Element\Geolocation) {
-            $helper = $renderer->plugin('form_geolocation');
+            $helper = $renderer->plugin('org_heigl_geolocation.formelement');
             return $helper($element);
         }
 

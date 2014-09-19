@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright (c)2014-2014 heiglandreas
- * 
+ * Copyright (c)2013-2013 heiglandreas
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -11,7 +11,7 @@
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,17 +20,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @category 
+ * @category
  * @author    Andreas Heigl<andreas@heigl.org>
- * @copyright ©2014-2014 Andreas Heigl
+ * @copyright ©2013-2013 Andreas Heigl
  * @license   http://www.opesource.org/licenses/mit-license.php MIT-License
  * @version   0.0
- * @since     25.07.14
+ * @since     29.07.13
  * @link      https://github.com/heiglandreas/
  */
 
-echo $this->renderedElement; ?>
+namespace OrgHeiglGeolocationTest\Form\View\Helper;
 
-<div id="<?php echo str_replace(array('[',']'), array('_', '_'),$this->element->getName()) ;?>_wrapper">
-    <div class="map"></div>
-</div>
+use \PHPUnit_Framework_TestCase as TestCase;
+use \OrgHeiglGeolocation\Form\View\Helper\Geolocation;
+use Mockery as M;
+
+class GeolocationTest extends TestCase
+{
+    public function testRendering()
+    {
+        $this->markTestIncomplete('Has to be implemented fully');
+
+        $element = M::mock('\OrgHeiglGeolocation\Form\Element\Geolocation');
+
+        $headScript = M::mock('\Zend\View\Helper\HeadScript');
+        $headLink   = M::mock('\Zend\View\Helper\HeadLink');
+        $view       = M::mock('\Zend\View\Renderer\PhpRenderer');
+        $headScript->setView($view);
+        $headLink->setView($view);
+
+        $renderer = new Geolocation();
+        $renderer->setView($view);
+
+        $this->assertEquals('foo', $renderer->render($element));
+
+    }
+}

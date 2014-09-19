@@ -34,9 +34,22 @@ namespace OrgHeiglGeolocation\Renderer\Geolocation;
 use Zend\View\Renderer\PhpRenderer as View;
 use Zend\Mvc\Router\RouteInterface;
 use Zend\Stdlib\AbstractOptions;
+use Zend\EventManager\StaticEventManager;
+use Zend\View\ViewEvent;
+
 
 class GeolocationRenderer
 {
+    public function __construct()
+    {
+        $events = StaticEventManager::getInstance ();
+
+        // Add event of authentication before dispatch
+        $events->attach('Zend\View\View', ViewEvent::EVENT_RENDERER_POST, array(
+            $this,
+            'preRenderForm'
+        ), 110 );
+    }
     /**
      * @var \Zend\Mvc\Router\RouteInterface $httpRouter
      */
@@ -50,22 +63,21 @@ class GeolocationRenderer
     /**
      * Executed before the ZF2 view helper renders the element
      *
-     * @param \Zend\View\Renderer\PhpRenderer $view
+     * @param \Zend\View\ViewEvent $view
      */
-    public function preRenderForm(View $view)
+    public function preRenderForm(ViewEvent $view)
     {
+        $view = $view->getRenderer();
         $inlineScript = $view->plugin('inlineScript');
 
-        $assetBaseUri = $this->getHttpRouter()->assemble(array(), array('name' => 'orgheiglgeolocation_assets'));
-        if ($this->getOptions()->isIncludeJquery()) {
-            $inlineScript->appendFile($assetBaseUri . '/lib/jquery/jquery.min.js');
-        }
-        if ($this->getOptions()->isIncludeLeaflet()) {
-            $inlineScript->appendFile($assetBaseUri . '/lib/leaflet/leaflet.min.js');
-        }
-
+        $assetBaseUri = $this->getHttpRouter()->assemble(array(), array('name' => 'home'));
+//        if ($this->getOptions()->isIncludeJquery()) {
+//            $inlineScript->appendFile($assetBaseUri . '/lib/jquery/jquery.min.js');
+//        }
+//        if ($this->getOptions()->isIncludeLeaflet()) {
+//            $inlineScript->appendFile($assetBaseUri . '/lib/leaflet/leaflet.min.js');
+//        }
         $inlineScript->appendFile($assetBaseUri . '/js/geolocation.js');
-
         return $this;
     }
 
@@ -83,7 +95,7 @@ class GeolocationRenderer
      *
      * @return Renderer
      */
-    public function setHttpRouter(RouterInterface $httpRouter)
+    public function setHttpRouter(RouteInterface $httpRouter)
     {
         $this->httpRouter = $httpRouter;
 
