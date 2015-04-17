@@ -47,7 +47,7 @@
             var marker = L.marker(ll).addTo(map);
 
             map.on('click', function(e){
-                input.val(e.latlng.lat + ' ' + e.latlng.lng);
+                input.val(e.latlng.lat + ' ' + e.latlng.lng).trigger('change');
                 marker.setLatLng(e.latlng);
             })
 
