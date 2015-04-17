@@ -46,8 +46,10 @@
             // Set a marker to the map
             var marker = L.marker(ll).addTo(map);
 
-            map.on('click', function(e){
+            marker.on('move', function(e){
                 input.val(e.latlng.lat + ' ' + e.latlng.lng).trigger('change');
+            });
+            map.on('click', function(e){
                 marker.setLatLng(e.latlng);
             })
 
