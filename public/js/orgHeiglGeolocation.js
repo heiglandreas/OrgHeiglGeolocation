@@ -50,7 +50,10 @@
                 input.val(e.latlng.lat + ' ' + e.latlng.lng);
                 marker.setLatLng(e.latlng);
             })
+
+            return {'map': map, 'marker': marker};
         });
+
     };
 }(jQuery));
 
