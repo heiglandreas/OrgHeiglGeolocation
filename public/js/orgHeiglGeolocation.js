@@ -6,7 +6,7 @@
 
         return this.map(function(){
             var input = $('[name="' + $(this).attr('name') + '"]');
-            var lll = input.val().match(/([-]?\d{1,2}(\.\d+)?)\D+([-]?\d{1,3}(\.\d+)?)/);
+            var lll = input.val().match(/([-]?\d{1,2}(\.\d+)?)\D+?([-]?\d{1,3}(\.\d+)?)/);
             if (! lll) {
                 lll = [0,0,0,0,0];
             }
