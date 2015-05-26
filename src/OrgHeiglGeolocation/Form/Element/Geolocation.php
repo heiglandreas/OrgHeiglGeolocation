@@ -31,6 +31,7 @@
 namespace OrgHeiglGeolocation\Form\Element;
 
 use OrgHeiglGeolocation\Validator\IsGeolocation;
+use OrgHeiglGeolocation\Filter\Geolocation;
 use Zend\Filter\StringTrim;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
@@ -68,6 +69,7 @@ class Geolocation extends Element implements InputProviderInterface
             'name'     => $this->getName(),
             'filters'  => array(
                 new StringTrim(),
+                new Geolocation()
             ),
             'validators' => array(
                 new IsGeolocation()
