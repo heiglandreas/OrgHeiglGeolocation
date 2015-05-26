@@ -1,17 +1,14 @@
 <?php
 /**
- * Copyright (c)2013-2013 Andreas Heigl<andreas@heigl.org>
- * 
+ * Copyright (c)2015-2015 heiglandreas
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,60 +17,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
+ * @category
  * @author    Andreas Heigl<andreas@heigl.org>
- * @copyright ©2013-2013 Andreas Heigl
+ * @copyright ©2015-2015 Andreas Heigl
  * @license   http://www.opesource.org/licenses/mit-license.php MIT-License
  * @version   0.0
- * @since     03.07.13
- * @link      https://github.com/heiglandreas/OrgHeiglGeolocation
+ * @since     26.05.15
+ * @link      https://github.com/heiglandreas/
  */
 
-namespace OrgHeiglGeolocation\Form\Element;
+namespace OrgHeiglGeolocationTest\Filter\Geolocation;
 
-use OrgHeiglGeolocation\Validator\IsGeolocation;
 use OrgHeiglGeolocation\Filter\Geolocation;
-use Zend\Filter\StringTrim;
-use Zend\Form\Element;
-use Zend\InputFilter\InputProviderInterface;
 
-/**
- * Provides a Geolocation-Element
- *
- * @author    Andreas Heigl<andreas@heigl.org>
- * @copyright ©2013-2013 Andreas Heigl
- * @license   http://www.opesource.org/licenses/mit-license.php MIT-License
- * @version   0.0
- * @since     03.07.13
- * @link      https://github.com/heiglandreas/OrgHeiglGeolocation
- **/
-class Geolocation extends Element implements InputProviderInterface
+class GeolocationTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Seed the attributes
-     *
-     * @var array
-     */
-    protected $attributes = array(
-        'type'  => 'text',
-        'class' => 'orgHeiglGeolocation',
-    );
 
     /**
-     * Get the input specifications
-     *
-     * @return array
+     * @dataProvider filterProvider
+     * @param $input
+     * @param $expected
      */
-    public function getInputSpecification()
+    public function testFilter($input, $expected)
+    {
+        $filter = new Geolocation();
+
+        $this->assertEquals($expected, $filter->filter($input));
+    }
+
+    public function filterProvider()
     {
         return array(
-            'name'     => $this->getName(),
-            'filters'  => array(
-                new StringTrim(),
-                new Geolocation()
-            ),
-            'validators' => array(
-                new IsGeolocation()
-            ),
+            array('0 0', '0 0'),
+            array('90.0 90.0', '90 90'),
+            array('90.0 180.0', '90 180'),
+            array('90.0 -180.0', '90 -180'),
+            array('90.0 190.0', '90 -170'),
+            array('50.0 -190.0', '50 170'),
+            array('50.0 360.0', '50 0'),
+            array('50.0 -360.0', '50 -0'),
+            array('50.0 400.0', '50 40'),
+            array('50.0 360.5', '50 0.5'),
+            array('50.0 -360.5', '50 -0.5'),
+            array('50.0 400.5', '50 40.5'),
+            array('50.0 -400.5', '50 -40.5'),
         );
     }
 }
