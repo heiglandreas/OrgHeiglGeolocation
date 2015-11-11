@@ -67,6 +67,7 @@ class GeolocationTest extends TestCase
 
         $expectedClasses = array(
             'Zend\Filter\StringTrim',
+            'OrgHeiglGeolocation\Filter\Geolocation',
         );
 
         foreach ($inputSpec['filters'] as $filter) {
