@@ -52,8 +52,15 @@ class Geolocation extends AbstractFilter
     public function filter($value)
     {
         if (! preg_match('/(?P<lat>[-]?\d{1,2}(\.\d+)?)\D+?(?P<lon>[-]?\d{1,3}(\.\d+)?)/', $value, $result)) {
-            $this->error(self::INVALID_FORMAT);
-            return $value;
+            trigger_error(
+                sprintf(
+                    'The give value "%1$s" can not be resolved to a geolocation',
+                    $value
+                ),
+                E_USER_WARNING
+            );
+
+            return '0 0';
         }
 
         $latitude  = (float) $result['lat'];
