@@ -15,9 +15,9 @@ so you can search for adresses.
 
 ## Installation
 
-Use ```composer``` for installation by adding the following to your ```composer.json``` file:
+Use ```composer``` for installation by running this shellscript:
 
-    "org_heigl/Geolocation" : "1.*"
+    $ composer require org_heigl/geolocation
 
 After that you will have to add ```Geolocation``` to the list of your enabled modules.
 
@@ -25,6 +25,9 @@ You will also have to copy the modules ```public``` folder into your application
 ```public``` folder renaming the modules one to ```orgheiglgeolocation```.
 
 Or you simply use the [AssetManager-Module][#]. Then you can skip this step!
+
+This module also needs a working jQuery available. You will have to take care 
+about that yourself!
 
 ## Usage
 
