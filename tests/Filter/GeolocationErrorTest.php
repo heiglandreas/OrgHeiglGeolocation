@@ -79,7 +79,7 @@ class GeolocationErrorTest extends TestCase
     public function filterProvider()
     {
         return array(
-            ['', '0 0', 'The give value "" can not be resolved to a geolocation', E_USER_WARNING],
+            ['', '', 'The give value "" can not be resolved to a geolocation', E_USER_WARNING],
         );
     }
 }
