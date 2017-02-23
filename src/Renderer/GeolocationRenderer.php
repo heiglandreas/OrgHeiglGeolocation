@@ -30,7 +30,6 @@
 
 namespace Org_Heigl\Geolocation\Renderer\Geolocation;
 
-use Zend\View\Renderer\PhpRenderer as View;
 use Zend\Mvc\Router\RouteInterface;
 use Zend\Stdlib\AbstractOptions;
 use Zend\EventManager\StaticEventManager;
@@ -39,16 +38,6 @@ use Zend\View\ViewEvent;
 
 class GeolocationRenderer
 {
-    public function __construct()
-    {
-        $events = StaticEventManager::getInstance ();
-
-        // Add event of authentication before dispatch
-        $events->attach('Zend\View\View', ViewEvent::EVENT_RENDERER_POST, array(
-            $this,
-            'preRenderForm'
-        ), 110 );
-    }
     /**
      * @var \Zend\Mvc\Router\RouteInterface $httpRouter
      */
@@ -59,66 +48,55 @@ class GeolocationRenderer
      */
     protected $options = null;
 
+    public function __construct()
+    {
+        $events = StaticEventManager::getInstance ();
+
+        // Add event of authentication before dispatch
+        $events->attach('Zend\View\View', ViewEvent::EVENT_RENDERER_POST, array(
+            $this,
+            'preRenderForm'
+        ), 110 );
+    }
+
     /**
      * Executed before the ZF2 view helper renders the element
      *
      * @param \Zend\View\ViewEvent $view
      */
-    public function preRenderForm(ViewEvent $view)
+    public function preRenderForm(ViewEvent $view) : self
     {
         $view = $view->getRenderer();
         $inlineScript = $view->plugin('inlineScript');
 
         $assetBaseUri = $this->getHttpRouter()->assemble(array(), array('name' => 'home'));
-//        if ($this->getOptions()->isIncludeJquery()) {
-//            $inlineScript->appendFile($assetBaseUri . '/lib/jquery/jquery.min.js');
-//        }
-//        if ($this->getOptions()->isIncludeLeaflet()) {
-//            $inlineScript->appendFile($assetBaseUri . '/lib/leaflet/leaflet.min.js');
-//        }
+
         $inlineScript->appendFile($assetBaseUri . '/js/geolocation.js');
+
         return $this;
     }
 
-
-    /**
-     * @return \Zend\Mvc\Router\RouteInterface
-     */
-    public function getHttpRouter()
+    public function getHttpRouter() : RouteInterface
     {
         return $this->httpRouter;
     }
 
-    /**
-     * @param \Zend\Mvc\Router\RouteInterface $httpRoute
-     *
-     * @return Renderer
-     */
-    public function setHttpRouter(RouteInterface $httpRouter)
+    public function setHttpRouter(RouteInterface $httpRouter) : self
     {
         $this->httpRouter = $httpRouter;
 
         return $this;
     }
 
-    /**
-     * @return \Zend\StdLib\AbstractOptions
-     */
-    public function getOptions()
+    public function getOptions() : AbstractOptions
     {
         return $this->options;
     }
 
-    /**
-     * @param \Zend\StdLib\AbstractOptions $options
-     *
-     * @return Renderer
-     */
-    public function setOptions(AbstractOptions $options = null)
+    public function setOptions(AbstractOptions $options = null) : self
     {
         $this->options = $options;
 
         return $this;
     }
-
 }

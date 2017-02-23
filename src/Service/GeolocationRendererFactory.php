@@ -37,20 +37,10 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class GeolocationRendererFactory implements FactoryInterface
 {
-    /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface  $serviceLocator
-     *
-     * @return \OrgHeiglGeolocation\Renderer\GeolocationRenderer
-     */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null) : GeolocationRenderer
     {
         $renderer = new GeolocationRenderer();
         $renderer->setHttpRouter($container->get('HttpRouter'));
-
-//        $options = $serviceLocator->get('OrgHeiglGeolocation\Options\ModuleOptions');
-//        $renderer->setDefaultOptions($options->getRendererOptions($rendererAlias))
 
         return $renderer;
     }

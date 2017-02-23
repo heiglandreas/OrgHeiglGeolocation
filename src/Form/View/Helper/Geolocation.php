@@ -38,7 +38,7 @@ class Geolocation extends FormText
 {
     protected $script = 'org-heigl-geolocation/form-element/geolocation';
 
-    public function render(ElementInterface $element)
+    public function render(ElementInterface $element) : string
     {
         $renderer = $this->getView();
 
@@ -65,7 +65,7 @@ class Geolocation extends FormText
         ));
     }
 
-    public function __invoke(ElementInterface $element = null)
+    public function __invoke(ElementInterface $element = null) : string
     {
         return $this->render($element);
     }

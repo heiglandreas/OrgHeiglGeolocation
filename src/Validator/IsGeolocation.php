@@ -71,10 +71,8 @@ class IsGeolocation extends AbstractValidator
      * range of -180 through 180
      *
      * @param string $value The value-string
-     *
-     * @return boolean
      */
-    public function isValid($value)
+    public function isValid($value) : bool
     {
         if (! preg_match('/(?P<lat>[-]?\d{1,2}(\.\d+)?)\D+(?P<lon>[-]?\d{1,3}(\.\d+)?)/', $value, $result)) {
             $this->error(self::INVALID_FORMAT);

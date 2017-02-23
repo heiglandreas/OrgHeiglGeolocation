@@ -60,10 +60,8 @@ class Geolocation extends Element implements InputProviderInterface
 
     /**
      * Get the input specifications
-     *
-     * @return array
      */
-    public function getInputSpecification()
+    public function getInputSpecification() : array
     {
         return array(
             'name'     => $this->getName(),
