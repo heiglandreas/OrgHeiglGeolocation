@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright Andreas Heigl <andreas@heigl.org>
+ * Copyright Andreas Heigl<andreas@heigl.org>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,51 +21,57 @@
  * THE SOFTWARE.
  *
  * @author    Andreas Heigl<andreas@heigl.org>
- * @copyright ©2013-2013 Andreas Heigl
+ * @copyright Andreas Heigl
  * @license   http://www.opesource.org/licenses/mit-license.php MIT-License
  * @version   0.0
- * @since     10.12.13
+ * @since     03.07.13
  * @link      https://github.com/heiglandreas/OrgHeiglGeolocation
  */
 
-namespace Org_Heigl\Geolocation;
+namespace Org_Heigl\Geolocation\Form\Element;
 
-use Org_Heigl\Geolocation\Form\Element\Geolocation;
-use Org_Heigl\Geolocation\Form\View\Helper\Geolocation as GeolocationHelper;
-use Org_Heigl\Geolocation\Renderer\Geolocation\GeolocationRenderer;
-use Org_Heigl\Geolocation\Service\GeolocationRendererFactory;
 use Org_Heigl\Geolocation\Validator\IsGeolocation;
 use Org_Heigl\Geolocation\Filter\Geolocation as GeolocationFilter;
+use Zend\Filter\StringTrim;
+use Zend\Form\Element;
+use Zend\InputFilter\InputProviderInterface;
 
-return array(
-    'view_manager' => array(
-        'template_path_stack' => array(
-            'orgheiglgeolocation' => __DIR__ . '/../view',
-        ),
-    ),
-    'asset_manager' => array(
-        'resolver_configs' => array(
-            'aliases' => array(
-                'orgheiglgeolocation/js' => __DIR__ . '/../public/js',
-                'orgheiglgeolocation/css' => __DIR__ . '/../public/css',
-                'orgheiglgeolocation/lib' => __DIR__ . '/../public/lib',
+/**
+ * Provides a Geolocation-Element
+ *
+ * @author    Andreas Heigl<andreas@heigl.org>
+ * @copyright ©2013-2013 Andreas Heigl
+ * @license   http://www.opesource.org/licenses/mit-license.php MIT-License
+ * @version   0.0
+ * @since     03.07.13
+ * @link      https://github.com/heiglandreas/OrgHeiglGeolocation
+ **/
+class Geolocation extends Element implements InputProviderInterface
+{
+    /**
+     * Seed the attributes
+     *
+     * @var array
+     */
+    protected $attributes = array(
+        'type'  => 'text',
+        'class' => 'orgHeiglGeolocation',
+    );
+
+    /**
+     * Get the input specifications
+     */
+    public function getInputSpecification() : array
+    {
+        return array(
+            'name'     => $this->getName(),
+            'filters'  => array(
+                new StringTrim(),
+                new GeolocationFilter()
             ),
-        ),
-    ),
-
-    'service_manager' => [
-        'factories' => [
-            GeolocationRenderer::class => GeolocationRendererFactory::class,
-        ],
-        'invokables' => [
-            Geolocation::class => Geolocation::class,
-            GeolocationFilter::class => GeolocationFilter::class,
-            IsGeolocation::class => IsGeolocation::class,
-        ],
-    ],
-    'view_helpers' => [
-        'invokables' => [
-            GeolocationHelper::class => GeolocationHelper::class,
-        ],
-    ],
-);
+            'validators' => array(
+                new IsGeolocation()
+            ),
+        );
+    }
+}

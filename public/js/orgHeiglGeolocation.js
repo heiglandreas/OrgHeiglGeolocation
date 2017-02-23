@@ -16,6 +16,7 @@
             var mds = mapDiv.identify()[0];
             $(this).css({display:'none'});
             mapDiv.css({width:'100%',height:'200px'});
+            /** global: L */
             var map = L.map(mds);
 
             var openstreetmap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -62,10 +63,11 @@
 (function($){
     var jQuery_anonymousElementCounter = 0;
     $.fn.identify = function() {
-        var i = 0;
         var prefix = 'anonymous_jquery_id';
         return this.map(function () {
-            if (this.id) return this.id;
+            if (this.id) {
+                return this.id;
+            }
             var id = prefix + '_' + jQuery_anonymousElementCounter++;
             $(this).attr('id', id);
             return id;

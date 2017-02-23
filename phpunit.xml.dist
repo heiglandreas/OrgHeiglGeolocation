@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="test/bootstrap.php">
-    <testsuite name="OrgHeiglGeolocation Test-Suite">
-        <directory>test/OrgHeiglGeolocationTest</directory>
+<phpunit bootstrap="vendor/autoload.php">
+    <testsuite name="Org_Heigl\Geolocation Test-Suite">
+        <directory>tests/</directory>
     </testsuite>
 
     <groups>
