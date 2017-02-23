@@ -48,7 +48,7 @@ return array(
             'aliases' => array(
                 'orgheiglgeolocation/js' => __DIR__ . '/../public/js',
                 'orgheiglgeolocation/css' => __DIR__ . '/../public/css',
-                'orgheiglgeolocation/lib' => __DIR__ . '/../node_modules',
+                'orgheiglgeolocation/lib' => __DIR__ . '/../public/lib',
             ),
         ),
     ),
