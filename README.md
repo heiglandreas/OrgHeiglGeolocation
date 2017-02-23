@@ -1,6 +1,6 @@
-# Geolocation-FormElement
-
 [![Build Status](https://travis-ci.org/heiglandreas/OrgHeiglGeolocation.svg)](https://travis-ci.org/heiglandreas/OrgHeiglGeolocation)
+
+# Geolocation-FormElement
 
 This module provides a form-element for Latitude/Longitude-values.
 
@@ -15,20 +15,32 @@ so you can search for adresses.
 
 ## Installation
 
-Use ```composer``` for installation by running this shellscript:
+The module is best installed using [composer](https://getcomposer.org)
 
-    $ composer require org_heigl/geolocation
+```bash
+    composer require org_heigl/geolocation
+```
 
-After that you will have to add ```Geolocation``` to the list of your enabled modules.
+## Prerequisites
 
-You will also have to copy the modules ```public``` folder into your applications
-```public``` folder renaming the modules one to ```orgheiglgeolocation```.
+1. Add ```Org_Heigl\Geolocation``` to the list of your enabled modules.
 
-Or you simply use the [AssetManager-Module][#]. Then you can skip this step!
+    ```php
+        return [
+            'modules' => [
+               …       
+               'Org_Heigl\Contact',
+               …
+            ]
+        ];
+    ```
 
-This module also needs a working jQuery available. You will have to take care 
-about that yourself!
-
+2. The content of the ```public```-folder needs to be available to the public.
+   When you use the [AssetManager](https://github.com/RWOverdijk/AssetManager)-Module that is already taken care of.
+   
+3. This module also needs a working jQuery available. You will have to take care 
+   about that yourself!
+         
 ## Usage
 
 After installation you should be able to add a form-element ```Geolocation``` to your forms right away
@@ -39,5 +51,4 @@ $form = new Zend\Form();
 $form->addElement('geolocation');
 ```
 
-  [1]: http://wiki.openstreetmap.org/wiki/Nominatim
-  [2]: https://github.com/RWOverdijk/AssetManager
+

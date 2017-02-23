@@ -2,7 +2,7 @@
     "name" : "org_heigl/geolocation",
     "type" : "library",
     "description": "Provides a form-element for locating a spot on the earth and providing Latitude/Longitude-values",
-    "keywords": ["geolocation", "latitude", "longitude", "earth"],
+    "keywords": ["geolocation", "latitude", "longitude", "earth", "zf3"],
     "homepage": "http://github.com/heiglandreas/OrgHeiglGeolocation",
     "license": "MIT",
     "authors": [{
@@ -12,44 +12,32 @@
         "role": "Developer"
     }],
     "require": {
-        "php": ">=5.3.3",
-        "zendframework/zend-form": ">=2.1",
-        "zendframework/zend-inputfilter": ">=2.1",
-        "zendframework/zend-validator": ">=2.1",
-        "zendframework/zend-view": ">=2.1",
-        "zendframework/zend-i18n": ">=2.1",
-        "zendframework/zend-servicemanager": ">=2.1",
-        "zendframework/zend-escaper": ">=2.1",
-        "zendframework/zend-modulemanager": ">=2.1"
+        "php": "^7.0",
+        "zendframework/zend-form": "^2.5||^3.0",
+        "zendframework/zend-inputfilter": "^2.5||3.0",
+        "zendframework/zend-validator": "^2.5||^3.0",
+        "zendframework/zend-view": "^2.5||^3.0",
+        "zendframework/zend-i18n": "^2.5||^3.0",
+        "zendframework/zend-servicemanager": "^2.5||^3.0",
+        "zendframework/zend-escaper": "^2.5||^3.0",
+        "zendframework/zend-modulemanager": "^2.5||^3.0",
+        "zendframework/zend-filter": "^2.7"
     },
     "require-dev" : {
-        "mockery/mockery" : "dev-master",
-        "phpunit/phpunit" : "3.7.*"
+        "mockery/mockery" : "^0.9",
+        "phpunit/phpunit" : "^6.0"
     },
-    "repositories" : [
-    {
-        "type": "package",
-        "package": {
-            "name": "jquery/jquery",
-            "version": "1.7.2",
-            "dist": {
-                "url": "http://code.jquery.com/jquery-1.7.2.js",
-                "type": "file"
-            }
-        }
-    }],
     "autoload": {
-        "psr-0": {
-            "OrgHeiglGeolocation\\": "src"
-        },
-        "classmap": [
-            "./"
-        ]
+        "psr-4": {
+            "Org_Heigl\\Geolocation\\": "src"
+        }
     },
     "autoload-dev" : {
-        "psr-0" : {
-            "OrgHeiglGeolocationTest\\" : "test"
+        "psr-4": {
+            "Org_Heigl\\GeolocationTest\\": "tests"
         }
     },
-    "minimum-stability": "dev"
+    "suggests" : {
+        "rwoverdijk/assetmanager" : "Helps providing the assets for tzhis package."
+    }
 }
