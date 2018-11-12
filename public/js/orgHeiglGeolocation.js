@@ -19,19 +19,16 @@
             /** global: L */
             var map = L.map(mds);
 
-            var openstreetmap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            var openstreetmap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
                 maxZoom: 18
             });
 
-            var opencyclemap = L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {
+            var opencyclemap = L.tileLayer('https://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
                 maxZoom: 18
             });
 
-            var shading = L.tileLayer('http://tiles.openpistemap.org/landshaded/{z}/{x}/{y}.png', {
-                opacity: 0.6
-            });
             map.setView(ll, 5)
                 .addLayer(openstreetmap);
 
@@ -39,7 +36,6 @@
                 'OpenStreetMap' : openstreetmap,
                 'OpenCycleMap'  : opencyclemap
             },{
-                'Hillshading' : shading
             },{
                 'position' : 'bottomleft'
             }).addTo(map);
